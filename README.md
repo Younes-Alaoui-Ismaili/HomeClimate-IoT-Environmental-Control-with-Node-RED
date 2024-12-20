@@ -19,12 +19,12 @@ A smart home monitoring system that tracks environmental parameters such as temp
    ```bash
    git clone https://github.com/Younes-Alaoui-Ismaili/IoT-Home-Application.git
    cd IoT-Home-Application
-## Node-RED Flow
-Below is the flow used to process data from the Sense HAT:
+### Node-RED Flow
+Below is the Node-RED flow used to process data from the Sense HAT. It shows how temperature, humidity, and pressure are extracted and visualized on the dashboard.
 
 ![Node-RED Flow](Flow%20on%20Node-Red.png)
 
-## Dashboard Front-End
-The following image shows the dashboard for monitoring:
+### Dashboard Front-End
+This dashboard provides real-time monitoring of environmental data like temperature, humidity, and pressure.
 
-![Dashboard](Home-monitoring-Front-End.png)
+![Dashboard Front-End](Home-monitoring-Front-End.png)

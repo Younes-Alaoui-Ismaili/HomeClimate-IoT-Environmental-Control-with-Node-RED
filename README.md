@@ -1,30 +1,47 @@
-# IoT Home Application
+# HomeClimate, IoT Environmental Control with Node-RED
 
-A smart home monitoring system that tracks environmental parameters such as temperature, humidity, and pressure using IoT devices. This application enables seamless data collection, visualization, and remote management via cloud integration.
+> Prototype 2019, capteurs environnementaux (DHT11, BMP180) + Node-RED + IBM Watson IoT.
 
-## Features
-- **Real-time Monitoring**: Collect and display sensor data in real time.
-- **Cloud Integration**: Utilize IBM Watson and Node-RED for data processing and visualization.
-- **User-Friendly Dashboard**: Provides an intuitive interface for monitoring multiple devices.
-- **Alerts and Notifications**: Configurable alerts for temperature thresholds and system errors.
+![Status](https://img.shields.io/badge/statut-archiv%C3%A9-lightgrey)
+![Year](https://img.shields.io/badge/an-2019-informational)
+![Stack](https://img.shields.io/badge/stack-Node--RED%20%7C%20IBM%20Watson-blue)
 
-## Technology Stack
-- **Frontend**: Node-RED for dashboard creation.
-- **Backend**: IBM Watson IoT for device management and data processing.
-- **Hardware**: IoT sensors (DHT11 for temperature and humidity, BMP180 for pressure).
-- **Protocols**: MQTT for communication between devices and cloud.
+---
 
-## Installation
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/Younes-Alaoui-Ismaili/IoT-Home-Application.git
-   cd IoT-Home-Application
-### Node-RED Flow
-Below is the Node-RED flow used to process data from the Sense HAT. It shows how temperature, humidity, and pressure are extracted and visualized on the dashboard.
+## Pourquoi ce repo est ici
 
+Projet exploratoire 2019, surveillance d'environnement domestique (température, humidité, pression) avec Node-RED et IBM Watson IoT. Conservé comme **point d'ancrage temporel** d'un parcours IoT qui a évolué vers l'edge-first AI au sein de Solutions Robaian (Aura, compagnon vocal IA AgeTech).
+
+**Statut** : archivé, non maintenu, conservé en vitrine.
+
+**De ce projet à Aura** :
+- 2019, IoT capteurs + cloud (Node-RED + IBM Watson).
+- 2025, IoT capteurs + edge (radars FMCW + Orange Pi 5 + NPU local, sans cloud pour les données brutes, conformité Loi 25 par design).
+
+---
+
+## Ce que démontre ce projet
+
+- Maîtrise des protocoles IoT (MQTT) et orchestration visuelle (Node-RED).
+- Intégration cloud (IBM Watson IoT) pour visualisation temps réel.
+- Conception de tableaux de bord opérationnels.
+
+## Captures
+
+### Flow Node-RED
 ![Node-RED Flow](Flow%20on%20Node-Red.png)
 
-### Dashboard Front-End
-This dashboard provides real-time monitoring of environmental data like temperature, humidity, and pressure.
+### Dashboard
+![Dashboard](Home-monitoring-Front-End.png)
 
-![Dashboard Front-End](Home-monitoring-Front-End.png)
+---
+
+## A propos
+
+Younes Alaoui Ismaili, fondateur de Solutions Robaian inc.
+Site web (à venir) : [robaian.com](https://robaian.com)
+Contact : info@robaian.com
+
+## Licence
+
+MIT.

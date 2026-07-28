@@ -1,0 +1,8 @@
+node_modules/
+coverage/
+dist/
+
+# Sortie locale du chemin vivant, jamais versionnee : elle peut contenir
+# la reponse brute d'un modele et n'a aucune valeur de reference.
+*.local.json
+flow.json

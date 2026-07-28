@@ -1,0 +1,38 @@
+{
+  "name": "homeclimate-nl-to-flow",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Turn a plain-language instruction into an importable Node-RED flow, with schema validated model output and an explicit refusal when the flow is invalid.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "nl2flow": "bin/nl2flow.js"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:cov": "vitest run --coverage",
+    "example": "node scripts/example.mjs",
+    "example:live": "node bin/nl2flow.js",
+    "check:typography": "node scripts/check-typography.mjs .",
+    "check:no-secrets": "node scripts/check-no-secrets.mjs ."
+  },
+  "keywords": [
+    "node-red",
+    "llm",
+    "structured-output",
+    "json-schema",
+    "iot",
+    "automation"
+  ],
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.115.0",
+    "@vitest/coverage-v8": "^4.1.10",
+    "vitest": "^4.1.10"
+  }
+}

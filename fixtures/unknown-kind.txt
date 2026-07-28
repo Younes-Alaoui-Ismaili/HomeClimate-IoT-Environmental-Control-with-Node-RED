@@ -1,0 +1,36 @@
+{
+  "label": "Publish readings",
+  "description": "Reads the sensor and posts each reading to a web service.",
+  "nodes": [
+    {
+      "id": "sensor_in",
+      "kind": "sensor",
+      "name": "Sense HAT",
+      "topic": null,
+      "code": null,
+      "property": null,
+      "operator": null,
+      "compareTo": null,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "intervalSeconds": null,
+      "wires": [["post_reading"]]
+    },
+    {
+      "id": "post_reading",
+      "kind": "webhook",
+      "name": "Post to service",
+      "topic": null,
+      "code": null,
+      "property": null,
+      "operator": null,
+      "compareTo": null,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "intervalSeconds": null,
+      "wires": []
+    }
+  ]
+}

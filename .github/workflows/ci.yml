@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["20", "22"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - run: npm ci
+
+      # The guards run before the tests. A credential or a style violation is
+      # cheap to catch and there is no reason to spend a test run first.
+      - name: Typography guard
+        run: npm run check:typography
+
+      - name: Secret guard
+        run: npm run check:no-secrets
+
+      - name: Tests with coverage
+        run: npm run test:cov
+
+      # The example is part of CI rather than documentation only: it is the
+      # claim the README makes to a reader, so it has to keep working.
+      - name: End to end example, offline
+        run: npm run example

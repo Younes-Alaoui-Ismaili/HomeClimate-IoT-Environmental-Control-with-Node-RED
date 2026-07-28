@@ -1,7 +1,7 @@
 # Fixtures
 
-Recorded model responses. Each `.txt` file is the raw assistant text for one
-instruction, replayed through the whole pipeline by the tests and by
+Fixture-backed model responses. Each `.txt` file is the raw assistant text for
+one instruction, replayed through the whole pipeline by the tests and by
 `npm run example`.
 
 ## Provenance

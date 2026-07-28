@@ -1,0 +1,81 @@
+{
+  "label": "Temperature monitor",
+  "description": "Reads the environmental sensor, shows the temperature on a gauge, and prints an alert above 30 degrees.",
+  "nodes": [
+    {
+      "id": "sensor_in",
+      "kind": "sensor",
+      "name": "Sense HAT",
+      "topic": null,
+      "code": null,
+      "property": null,
+      "operator": null,
+      "compareTo": null,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "intervalSeconds": null,
+      "wires": [["extract_temperature"]]
+    },
+    {
+      "id": "extract_temperature",
+      "kind": "function",
+      "name": "Extract temperature",
+      "topic": null,
+      "code": "msg.payload = msg.payload.temperature;\nreturn msg;",
+      "property": null,
+      "operator": null,
+      "compareTo": null,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "intervalSeconds": null,
+      "wires": [["temperature_gauge", "above_threshold"]]
+    },
+    {
+      "id": "temperature_gauge",
+      "kind": "gauge",
+      "name": "Temperature",
+      "topic": null,
+      "code": null,
+      "property": null,
+      "operator": null,
+      "compareTo": null,
+      "unit": "°C",
+      "min": -10,
+      "max": 50,
+      "intervalSeconds": null,
+      "wires": []
+    },
+    {
+      "id": "above_threshold",
+      "kind": "switch",
+      "name": "Above 30 degrees",
+      "topic": null,
+      "code": null,
+      "property": "payload",
+      "operator": "gt",
+      "compareTo": "30",
+      "unit": null,
+      "min": null,
+      "max": null,
+      "intervalSeconds": null,
+      "wires": [["alert"]]
+    },
+    {
+      "id": "alert",
+      "kind": "debug",
+      "name": "Temperature alert",
+      "topic": null,
+      "code": null,
+      "property": null,
+      "operator": null,
+      "compareTo": null,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "intervalSeconds": null,
+      "wires": []
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+![HomeClimate banner](docs/banner.jpg)
+
 # HomeClimate
 
 An environmental monitoring prototype from 2019, extended in 2026 with a

@@ -1,0 +1,181 @@
+[
+  {
+    "id": "tab_main",
+    "type": "tab",
+    "label": "Climate Monitoring",
+    "disabled": false,
+    "info": "Subscribes to MQTT topic homeclimate/input, converts payload to number, displays in gauge and publishes to homeclimate/output"
+  },
+  {
+    "id": "mqtt-in-1",
+    "type": "mqtt in",
+    "z": "tab_main",
+    "name": "Input MQTT",
+    "topic": "homeclimate/input",
+    "qos": "2",
+    "datatype": "auto-detect",
+    "broker": "cfg_mqtt_broker",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 160,
+    "y": 80,
+    "wires": [
+      [
+        "function-1"
+      ]
+    ]
+  },
+  {
+    "id": "function-1",
+    "type": "function",
+    "z": "tab_main",
+    "name": "Convert to Number",
+    "func": "msg.payload = parseFloat(msg.payload); return msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 350,
+    "y": 80,
+    "wires": [
+      [
+        "gauge-1",
+        "mqtt-out-1"
+      ]
+    ]
+  },
+  {
+    "id": "gauge-1",
+    "type": "ui-gauge",
+    "z": "tab_main",
+    "name": "Temperature Gauge",
+    "group": "cfg_ui_group",
+    "order": 0,
+    "width": 6,
+    "height": 4,
+    "x": 540,
+    "y": 80,
+    "wires": [],
+    "className": "",
+    "gtype": "gauge-half",
+    "gstyle": "needle",
+    "title": "Temperature Gauge",
+    "label": "Temperature Gauge",
+    "units": "°C",
+    "min": 0,
+    "max": 100,
+    "value": "payload",
+    "valueType": "msg",
+    "segments": [
+      {
+        "from": 0,
+        "color": "#16a34a"
+      }
+    ],
+    "sizes": {
+      "gap": 4,
+      "gauge": 4,
+      "fontTitle": 16,
+      "fontValue": 28,
+      "fontUnits": 16
+    }
+  },
+  {
+    "id": "mqtt-out-1",
+    "type": "mqtt out",
+    "z": "tab_main",
+    "name": "Output MQTT",
+    "topic": "homeclimate/output",
+    "qos": "",
+    "retain": "",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "cfg_mqtt_broker",
+    "x": 540,
+    "y": 150,
+    "wires": []
+  },
+  {
+    "id": "cfg_ui_group",
+    "type": "ui-group",
+    "name": "Climate Monitoring",
+    "page": "cfg_ui_tab",
+    "width": 12,
+    "height": 1,
+    "order": 1,
+    "showTitle": true,
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "cfg_ui_tab",
+    "type": "ui-page",
+    "name": "Climate Monitoring",
+    "ui": "cfg_ui_base",
+    "path": "/home",
+    "icon": "home",
+    "layout": "grid",
+    "theme": "cfg_ui_theme",
+    "order": 1,
+    "visible": "true",
+    "disabled": "false",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "cfg_mqtt_broker",
+    "type": "mqtt-broker",
+    "name": "local broker",
+    "broker": "localhost",
+    "port": "1883",
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true
+  },
+  {
+    "id": "cfg_ui_base",
+    "type": "ui-base",
+    "name": "HomeClimate local demonstration",
+    "path": "/dashboard",
+    "includeClientData": true,
+    "acceptsClientConfig": [],
+    "showPathInSidebar": false,
+    "showPageTitle": true,
+    "navigationStyle": "default"
+  },
+  {
+    "id": "cfg_ui_theme",
+    "type": "ui-theme",
+    "name": "HomeClimate",
+    "colors": {
+      "surface": "#ffffff",
+      "primary": "#166534",
+      "bgPage": "#f1f5f9",
+      "groupBg": "#ffffff",
+      "groupOutline": "#cbd5e1"
+    },
+    "sizes": {
+      "density": "default",
+      "pagePadding": "12px",
+      "groupGap": "12px",
+      "groupBorderRadius": "4px",
+      "widgetGap": "12px"
+    }
+  }
+]

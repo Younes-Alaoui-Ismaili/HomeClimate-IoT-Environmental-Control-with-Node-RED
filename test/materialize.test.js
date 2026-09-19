@@ -32,8 +32,8 @@ describe("materialize", () => {
     const { flow } = materialize(
       makePlan([makeNode({ id: "g", kind: "gauge" })]),
     );
-    expect(byId(flow, "cfg_ui_group")).toMatchObject({ type: "ui_group" });
-    expect(byId(flow, "cfg_ui_tab")).toMatchObject({ type: "ui_tab" });
+    expect(byId(flow, "cfg_ui_group")).toMatchObject({ type: "ui-group" });
+    expect(byId(flow, "cfg_ui_tab")).toMatchObject({ type: "ui-page" });
     expect(byId(flow, "g").group).toBe("cfg_ui_group");
   });
 
@@ -92,7 +92,7 @@ describe("materialize", () => {
       });
       const result = materialize(makePlan([node]));
       expect(result.ok, `kind "${kind}" has no materialiser`).toBe(true);
-      expect(byId(result.flow, "only").type).toBe(KINDS[kind].type);
+      expect(byId(result.flow, "only").type).toBe(["gauge", "chart", "text"].includes(kind) ? KINDS[kind].type.replace("_", "-") : KINDS[kind].type);
       expect(validateFlow(result.flow).ok, `kind "${kind}" produced an invalid flow`).toBe(
         true,
       );

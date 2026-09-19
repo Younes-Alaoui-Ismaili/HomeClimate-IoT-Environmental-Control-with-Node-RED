@@ -6,7 +6,7 @@
   "type": "module",
   "license": "MIT",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.9"
   },
   "bin": {
     "nl2flow": "bin/nl2flow.js"
@@ -15,6 +15,7 @@
     "test": "vitest run",
     "test:cov": "vitest run --coverage",
     "example": "node scripts/example.mjs",
+    "example:local": "node scripts/generate-local.mjs",
     "example:live": "node bin/nl2flow.js",
     "check:typography": "node scripts/check-typography.mjs .",
     "check:no-secrets": "node scripts/check-no-secrets.mjs ."
@@ -32,7 +33,12 @@
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
+    "@flowfuse/node-red-dashboard": "^1.31.0",
     "@vitest/coverage-v8": "^4.1.10",
+    "aedes": "^1.1.2",
+    "mqtt": "^5.15.2",
+    "node-red": "^5.0.7",
+    "playwright-core": "^1.62.0",
     "vitest": "^4.1.10"
   }
 }

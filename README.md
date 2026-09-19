@@ -2,12 +2,14 @@
 
 # HomeClimate
 
+**Current runtime extension:** [local Ollama generation, FlowFuse Dashboard and MQTT proof](docs/local-runtime.md). The default output now uses current Dashboard nodes while historical inputs remain readable. A reviewed generated flow has been executed locally with synthetic messages and broker reconnection; this adds no claim of physical sensor validation.
+
 An environmental monitoring prototype from 2019, extended in 2026 with a
 generator that turns a plain-language instruction into an importable Node-RED
 flow.
 
 [![CI](https://github.com/Younes-Alaoui-Ismaili/HomeClimate-IoT-Environmental-Control-with-Node-RED/actions/workflows/ci.yml/badge.svg)](https://github.com/Younes-Alaoui-Ismaili/HomeClimate-IoT-Environmental-Control-with-Node-RED/actions/workflows/ci.yml)
-![Node](https://img.shields.io/badge/node-20%20%7C%2022-informational)
+![Node](https://img.shields.io/badge/node-22-informational)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 ---
@@ -16,7 +18,7 @@ flow.
 
 **2019, the prototype.** A home environment monitor: DHT11 and BMP180 sensors
 feeding Node-RED over MQTT, with an IBM Watson IoT backend and a dashboard.
-`Back-end.js` is the exported flow exactly as it was committed in 2019, and the
+`Back-end.js` is the historical exported flow preserved in this repository, and the
 two screenshots below are from that build. Nothing in the 2026 layer modifies
 it.
 
@@ -115,7 +117,7 @@ file, no default and no example value anywhere in this repository.
 
 ## What is proven here
 
-Every claim below is checked by `npm test` and by CI on Node 20 and 22.
+The structural claims below are checked by `npm test`. CI is configured for Node 22. The local runtime and browser checks are separate evidence.
 
 | Claim | How it is checked |
 | --- | --- |
@@ -130,8 +132,7 @@ Every claim below is checked by `npm test` and by CI on Node 20 and 22.
 | No test can reach the network | the client is a required injected argument, with no default |
 | The API key is never exposed on the client object | asserted directly |
 
-At the last local run: 68 tests across 7 files, coverage 94.37 percent of
-statements, 90.76 percent of branches and 95.23 percent of lines.
+The earlier 68-test coverage snapshot describes the original generator. Run `npm run test:cov` for the current code; local runtime recordings are not included in unit coverage.
 
 ## What is not proven here
 
@@ -145,10 +146,7 @@ This section exists because the table above is worth nothing without it.
   written to be representative, including the formatting quirks the pipeline
   has to survive, but nobody should read them as evidence of what a given model
   returned on a given day. See `fixtures/README.md`.
-- **No generated flow has been imported into a running Node-RED instance as
-  part of CI.** Validation here is structural: identity, reachability, tab and
-  configuration node conventions. It is stricter than a schema and it is not
-  the same thing as Node-RED accepting the file.
+- **CI validation remains structural.** Actual Node-RED deployment, MQTT transmission, broker reconnection and browser rendering are exercised separately by the [local runtime procedure](docs/local-runtime.md). They do not run in fixture-only CI.
 - **The 2019 hardware build is not reproducible from this repository alone.**
   There is no wiring diagram and no parts list, only the exported flow and two
   screenshots.
@@ -177,9 +175,13 @@ scripts/             offline example and the repository guards
 test/                the suite
 ```
 
+## Recorded local execution
+
+[Runtime and browser evidence](evidence/README.md) shows a reviewed model-generated plan receiving synthetic MQTT messages, displaying the gauge and reconnecting after a broker restart. No physical sensor is claimed.
+
 ## Requirements
 
-Node 20 or later. One runtime dependency, `zod`. The Anthropic SDK is a
+Node 22.9 or later for the complete runtime. The generator's runtime dependency is `zod`. Node-RED, FlowFuse Dashboard, MQTT and the local broker are development dependencies. The Anthropic SDK is a
 development dependency and is imported lazily, so the offline paths run without
 it.
 

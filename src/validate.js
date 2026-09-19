@@ -69,6 +69,13 @@ export function validateFlow(flow) {
     seen.add(node.id);
   }
 
+  const references = { 'ui-gauge': ['group','ui-group'], 'ui-chart': ['group','ui-group'], 'ui-text': ['group','ui-group'], 'ui-group': ['page','ui-page'], 'ui-page': ['ui','ui-base'] };
+  for (const node of flow) {
+    const reference = references[node.type];
+    if (reference && !flow.some(target => target.id === node[reference[0]] && target.type === reference[1])) issues.push(issue('missing_configuration', 'Missing ' + reference[1] + ' for ' + node.id, node.id));
+    if (node.type === 'ui-page' && !flow.some(target => target.id === node.theme && target.type === 'ui-theme')) issues.push(issue('missing_theme','Missing dashboard theme',node.id));
+  }
+
   const tabs = flow.filter((node) => node.type === "tab");
   if (tabs.length === 0) {
     issues.push(

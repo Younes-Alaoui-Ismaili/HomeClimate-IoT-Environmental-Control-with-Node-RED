@@ -1,0 +1,8 @@
+{
+  "runtime": "real local Node-RED + MQTT broker",
+  "first": 35,
+  "afterReconnect": 27,
+  "reconnects": 1,
+  "physicalSensor": false,
+  "date": "2026-09-09T14:10:58.659Z"
+}

@@ -42,10 +42,10 @@ const PATTERNS = [
   },
 ];
 
-const SKIP_DIRS = new Set([".git", "node_modules", "dist", "coverage"]);
+const SKIP_DIRS = new Set([".git", "node_modules", "dist", "coverage", ".runtime"]);
 const BINARY_EXT = new Set([
   ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".pdf", ".zip", ".gz",
-  ".woff", ".woff2", ".ttf", ".otf", ".eot", ".mp4", ".mov", ".mp3", ".wasm",
+  ".woff", ".woff2", ".ttf", ".otf", ".eot", ".mp4", ".webm", ".mov", ".mp3", ".wasm",
 ]);
 
 const SELF = path.resolve(process.argv[1] ?? "");

@@ -18,6 +18,8 @@ import {
   TERMINAL_KINDS,
 } from "./catalog.js";
 
+import { toFlowFuse } from "./flowfuse.js";
+
 const RESERVED_PREFIX = /^(tab_|cfg_)/;
 
 const GAUGE_COLORS = ["#00b500", "#e6e600", "#ca3838"];
@@ -26,7 +28,7 @@ const GAUGE_COLORS = ["#00b500", "#e6e600", "#ca3838"];
  * @param {import("./schema.js").planSchema extends infer _ ? object : never} plan
  * @returns {{ ok: true, flow: object[] } | { ok: false, issues: {code: string, message: string, node?: string}[] }}
  */
-export function materialize(plan) {
+export function materialize(plan, { dashboard = "flowfuse" } = {}) {
   const issues = [];
 
   for (const node of plan.nodes) {
@@ -362,7 +364,7 @@ export function materialize(plan) {
     });
   }
 
-  return { ok: true, flow };
+  return { ok: true, flow: dashboard === "legacy" ? flow : toFlowFuse(flow) };
 }
 
 /**

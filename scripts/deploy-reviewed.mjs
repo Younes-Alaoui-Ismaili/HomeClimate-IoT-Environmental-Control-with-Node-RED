@@ -1,0 +1,14 @@
+import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { validateFlow } from '../src/validate.js';
+const [file, approvedHash] = process.argv.slice(2);
+if (!file || !/^[a-f0-9]{64}$/.test(approvedHash ?? '')) throw new Error('Usage: node scripts/deploy-reviewed.mjs flow.json SHA256_AFTER_REVIEW');
+const raw = await readFile(file,'utf8');
+if (createHash('sha256').update(raw).digest('hex') !== approvedHash) throw new Error('The reviewed flow changed; deployment refused');
+const flow = JSON.parse(raw);
+const result = validateFlow(flow);
+if (!result.ok) throw new Error(JSON.stringify(result.issues));
+if (flow.some(n => n.type === 'rpi-sensehat in')) throw new Error('This demonstration has no physical sensor');
+const response = await fetch('http://127.0.0.1:18880/red/flows',{method:'POST',headers:{'Content-Type':'application/json','Node-RED-API-Version':'v2'},body:JSON.stringify({flows:flow}),signal:AbortSignal.timeout(15000)});
+if (!response.ok) throw new Error('Runtime refused flow: HTTP '+response.status+' '+await response.text());
+console.log(JSON.stringify({deployed:true,sha256:approvedHash,runtime:'local Node-RED',physicalSensor:false}));

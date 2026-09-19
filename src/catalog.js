@@ -24,6 +24,9 @@ export const FLOW_NODE_TYPES = new Set([
   "mqtt in",
   "mqtt out",
   "http request",
+  "ui-gauge",
+  "ui-chart",
+  "ui-text",
   "ui_gauge",
   "ui_chart",
   "ui_text",
@@ -31,7 +34,7 @@ export const FLOW_NODE_TYPES = new Set([
 ]);
 
 /** Node-RED configuration types. They are global: no `z`, no `wires`. */
-export const CONFIG_NODE_TYPES = new Set(["ui_group", "ui_tab", "mqtt-broker"]);
+export const CONFIG_NODE_TYPES = new Set(["ui_group", "ui_tab", "ui-base", "ui-page", "ui-group", "ui-theme", "mqtt-broker"]);
 
 /**
  * The kinds a model may use, mapped to the Node-RED type they materialise into.
